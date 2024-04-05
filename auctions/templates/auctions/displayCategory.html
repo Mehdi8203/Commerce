@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>{{ activelistings.category }}</h2>
+<nav class="navbar navbar-expand-lg navbar-light my-3" style="background-color: #45A29E;">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li>
+                <span class="navbar-text" style="color: white; margin-left: 10px; margin-right: 10px;">
+                    Categories:
+                </span>
+            </li>
+            {% for cat in categories %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'displayCategory' cat %}">{{cat}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    </nav>
+<div class="row mx-3">
+    {% for listing in activeListings %}
+        <div class="card mx-3" style="width: 18rem;">
+            <img class="card-img-top" src="{{ listing.imageUrl }}" alt="{{ listing.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ listing.title }}</h5>
+                <p class="card-text">{{ listing.description }}</p>
+                <a href="{% url 'listing' listing.id %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
